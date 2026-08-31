@@ -25,6 +25,8 @@
 
 ```bash
 # Python 3.10+
+git clone https://github.com/AliceJump/auto-checkin.git
+cd auto-checkin
 pip install -r requirements.txt
 
 cp config.yaml.example config.yaml   # Windows: copy
@@ -94,7 +96,7 @@ notify:
 
 ```bash
 sudo mkdir -p /opt/auto-checkin && sudo chown $USER /opt/auto-checkin
-# 上传项目文件到 /opt/auto-checkin 后：
+git clone https://github.com/AliceJump/auto-checkin.git /opt/auto-checkin
 cd /opt/auto-checkin
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 cp config.yaml.example config.yaml && vim config.yaml
