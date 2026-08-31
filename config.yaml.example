@@ -1,0 +1,48 @@
+# 森空岛自动签到服务配置
+# 复制为 config.yaml 后按需修改
+
+# 定时签到
+schedule:
+  enabled: true        # 是否启用每日定时
+  timezone: Asia/Shanghai  # 签到时刻按此时区计算，默认北京时间
+  hour: 5              # 默认北京时间 06:00 前（05:00）
+  minute: 0            # 0-59
+  catch_up: true       # 服务启动时若今天已错过时间点则立即补签
+
+# 账号凭证存储文件（相对本文件所在目录或绝对路径）
+accounts_file: accounts.json
+
+# 状态看板（与 ok-logs 类似的网页面板）
+web:
+  enabled: true
+  host: 127.0.0.1     # 反代场景绑本机即可；直接访问可改 0.0.0.0
+  port: 18084
+
+# 日志目录
+log_dir: logs
+
+# 通知渠道：可同时启用多个，签到结果会推送到所有启用渠道（日志始终记录）
+notify:
+  # Telegram Bot
+  telegram:
+    enabled: false
+    bot_token: ""
+    chat_id: ""
+  # Server酱 (https://sct.ftqq.com)
+  serverchan:
+    enabled: false
+    send_key: ""
+  # PushPlus (https://www.pushplus.plus)
+  pushplus:
+    enabled: false
+    token: ""
+  # 邮件（SMTP）
+  email:
+    enabled: false
+    smtp_host: smtp.qq.com
+    smtp_port: 465
+    use_ssl: true
+    username: ""          # 发件邮箱
+    auth_code: ""         # SMTP 授权码（非登录密码）
+    to_addrs: ""          # 收件人，逗号分隔多个
+    prefix: "[auto-checkin]"

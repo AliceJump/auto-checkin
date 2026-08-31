@@ -1,0 +1,30 @@
+# systemd 单元示例（Linux 服务器部署）
+#
+# 安装：
+#   sudo cp deploy/auto-checkin.service /etc/systemd/system/
+#   # 按实际路径/用户修改下面的 WorkingDirectory、ExecStart、User
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now auto-checkin
+#
+# 查看日志：
+#   journalctl -u auto-checkin -f
+#   # 或应用自身日志: logs/signer.log
+
+[Unit]
+Description=Auto Check-in Service (Skland / Arknights / Endfield)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 修改为实际部署目录与 Python 路径
+User=www-data
+WorkingDirectory=/opt/auto-checkin
+ExecStart=/opt/auto-checkin/.venv/bin/python main.py run
+Restart=always
+RestartSec=10
+# 签到时刻由应用内 schedule.timezone（默认北京时间）决定，此行仅保持系统日志时区一致，可选
+Environment=TZ=Asia/Shanghai
+
+[Install]
+WantedBy=multi-user.target
